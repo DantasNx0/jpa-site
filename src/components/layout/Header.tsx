@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
-import { ModeToggle } from "@/components/ui/ModeToggle"
+
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -34,7 +34,7 @@ export function Header() {
           <Link href="/contato" className="text-sm font-medium hover:text-primary transition-colors">
             Contato
           </Link>
-          <ModeToggle />
+
           <Button asChild variant="secondary">
             <Link href="/orcamento">Solicitar Proposta</Link>
           </Button>
@@ -42,7 +42,7 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-2 md:hidden">
-          <ModeToggle />
+
           <button className="p-2" onClick={toggleMenu}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>

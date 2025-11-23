@@ -25,7 +25,6 @@ function OrcamentoForm() {
       email: formData.get("email"),
       phone: formData.get("phone"),
       serviceType: formData.get("service"),
-      budget: formData.get("budget"),
       description: formData.get("description"),
       deadline: formData.get("deadline"),
     };
@@ -91,17 +90,6 @@ function OrcamentoForm() {
               <option value="Análise de Dados">Análise de Dados</option>
               <option value="Gestão Comercial">Gestão Comercial</option>
               <option value="Outro">Outro</option>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="budget">Orçamento Estimado</Label>
-            <Select id="budget" name="budget" defaultValue="">
-              <option value="" disabled>Selecione uma faixa</option>
-              <option value="ate-5k">Até R$ 5.000</option>
-              <option value="5k-15k">R$ 5.000 - R$ 15.000</option>
-              <option value="15k-50k">R$ 15.000 - R$ 50.000</option>
-              <option value="acima-50k">Acima de R$ 50.000</option>
-              <option value="nao-sei">Não tenho certeza</option>
             </Select>
           </div>
         </div>

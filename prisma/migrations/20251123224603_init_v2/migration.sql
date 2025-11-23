@@ -19,7 +19,6 @@ CREATE TABLE "Quote" (
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "serviceType" TEXT NOT NULL,
-    "budget" TEXT,
     "description" TEXT NOT NULL,
     "deadline" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

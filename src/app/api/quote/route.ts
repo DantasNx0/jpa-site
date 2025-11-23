@@ -8,7 +8,6 @@ const quoteSchema = z.object({
   email: z.string().email("E-mail inválido"),
   phone: z.string().min(1, "Telefone é obrigatório"),
   serviceType: z.string().min(1, "Tipo de serviço é obrigatório"),
-  budget: z.string().optional(),
   description: z.string().min(1, "Descrição é obrigatória"),
   deadline: z.string().optional(),
 });

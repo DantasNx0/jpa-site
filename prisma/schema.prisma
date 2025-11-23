@@ -24,7 +24,6 @@ model Quote {
   email       String
   phone       String
   serviceType String
-  budget      String?
   description String
   deadline    String?
   createdAt   DateTime @default(now())

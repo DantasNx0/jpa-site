@@ -21,6 +21,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, contact }, { status: 201 });
   } catch (error) {
+    console.error("Erro ao processar contato:", error);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }

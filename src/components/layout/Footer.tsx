@@ -47,15 +47,15 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-gray-300 text-sm">
                 <Phone className="h-4 w-4 text-secondary" />
-                <span>(11) 99999-9999</span>
+                <span>(61) 98148-5505</span>
               </li>
               <li className="flex items-center gap-2 text-gray-300 text-sm">
                 <Mail className="h-4 w-4 text-secondary" />
-                <span>contato@jpatech.com.br</span>
+                <span>jpatech.inovation@gmail.com</span>
               </li>
               <li className="flex items-center gap-2 text-gray-300 text-sm">
                 <MapPin className="h-4 w-4 text-secondary" />
-                <span>São Paulo, SP</span>
+                <span>Brasília, DF</span>
               </li>
             </ul>
           </div>
@@ -64,15 +64,15 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Siga-nos</h3>
             <div className="flex gap-4">
-              <a href="#" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
+              <a href="https://www.instagram.com/jpa.tech/" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
               <a href="#" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
+              {/* <a href="#" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
                 <Facebook className="h-5 w-5" />
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

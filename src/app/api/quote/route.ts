@@ -24,6 +24,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, quote }, { status: 201 });
   } catch (error) {
+    console.error("Erro ao processar orçamento:", error);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }

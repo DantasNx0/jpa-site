@@ -22,20 +22,20 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link href="/" className="relative text-sm font-medium px-2 py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">
             Home
           </Link>
-          <Link href="/sobre" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link href="/sobre" className="relative text-sm font-medium px-2 py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">
             Sobre Nós
           </Link>
-          <Link href="/servicos" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link href="/servicos" className="relative text-sm font-medium px-2 py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">
             Serviços
           </Link>
-          <Link href="/contato" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link href="/contato" className="relative text-sm font-medium px-2 py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">
             Contato
           </Link>
 
-          <Button asChild variant="secondary">
+          <Button asChild variant="secondary" className="ml-2">
             <Link href="/orcamento">Solicitar Proposta</Link>
           </Button>
         </nav>

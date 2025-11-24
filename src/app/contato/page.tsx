@@ -6,9 +6,21 @@ import { Label } from "@/components/ui/Label";
 import { Textarea } from "@/components/ui/Textarea";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
+import { Modal } from "@/components/ui/Modal";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    type: "success" | "error";
+  }>({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "success"
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,14 +43,29 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        alert("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+        setModalState({
+          isOpen: true,
+          title: "Mensagem Enviada!",
+          message: "Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.",
+          type: "success"
+        });
         (e.target as HTMLFormElement).reset();
       } else {
-        alert("Erro ao enviar mensagem. Tente novamente.");
+        setModalState({
+          isOpen: true,
+          title: "Erro no Envio",
+          message: "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.",
+          type: "error"
+        });
       }
     } catch (error) {
       console.error(error);
-      alert("Erro ao enviar mensagem. Tente novamente.");
+      setModalState({
+        isOpen: true,
+        title: "Erro no Envio",
+        message: "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.",
+        type: "error"
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -46,6 +73,14 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col gap-16 pb-16">
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+      />
+
       {/* Hero Section */}
       <section className="bg-primary py-20 text-white">
         <div className="container mx-auto px-4 text-center">
@@ -85,8 +120,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">E-mail</h3>
-                  <p className="text-gray-600">contato@jpatech.com.br</p>
-                  <a href="mailto:contato@jpatech.com.br" className="text-sm text-secondary hover:underline">Enviar e-mail</a>
+                  <p className="text-gray-600">jpatech.inovation@gmail.com</p>
+                  <a href="mailto:jpatech.inovation@gmail.com" className="text-sm text-secondary hover:underline">Enviar e-mail</a>
                 </div>
               </div>
 
@@ -96,8 +131,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Localização</h3>
-                  <p className="text-gray-600">Av. Paulista, 1000 - Bela Vista</p>
-                  <p className="text-gray-600">São Paulo - SP</p>
+                  <p className="text-gray-600">Brasília - DF</p>
                 </div>
               </div>
             </div>

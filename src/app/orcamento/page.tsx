@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/Label";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
 import { CheckCircle, Send } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
@@ -13,6 +14,17 @@ function OrcamentoForm() {
   const searchParams = useSearchParams();
   const initialService = searchParams.get("servico") || "";
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    type: "success" | "error";
+  }>({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "success"
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,94 +49,118 @@ function OrcamentoForm() {
       });
 
       if (response.ok) {
-        alert("Solicitação de orçamento enviada com sucesso! Nossa equipe analisará e entrará em contato.");
+        setModalState({
+          isOpen: true,
+          title: "Solicitação Enviada!",
+          message: "Solicitação de orçamento enviada com sucesso! Nossa equipe analisará e entrará em contato.",
+          type: "success"
+        });
         (e.target as HTMLFormElement).reset();
       } else {
-        alert("Erro ao enviar solicitação. Tente novamente.");
+        setModalState({
+          isOpen: true,
+          title: "Erro no Envio",
+          message: "Erro ao enviar solicitação. Tente novamente.",
+          type: "error"
+        });
       }
     } catch (error) {
       console.error(error);
-      alert("Erro ao enviar solicitação. Tente novamente.");
+      setModalState({
+        isOpen: true,
+        title: "Erro no Envio",
+        message: "Erro ao enviar solicitação. Tente novamente.",
+        type: "error"
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      {/* Dados Pessoais */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-primary border-b pb-2">1. Seus Dados</h3>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label htmlFor="name">Nome Completo</Label>
-            <Input id="name" name="name" required placeholder="Seu nome" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="company">Empresa</Label>
-            <Input id="company" name="company" placeholder="Nome da sua empresa" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">E-mail Corporativo</Label>
-            <Input id="email" name="email" type="email" required placeholder="seu@email.com" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="phone">Telefone / WhatsApp</Label>
-            <Input id="phone" name="phone" required placeholder="(11) 99999-9999" />
+    <>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => setModalState(prev => ({ ...prev, isOpen: false }))}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+      />
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Dados Pessoais */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-primary border-b pb-2">1. Seus Dados</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="name">Nome Completo</Label>
+              <Input id="name" name="name" required placeholder="Seu nome" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="company">Empresa</Label>
+              <Input id="company" name="company" placeholder="Nome da sua empresa" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">E-mail Corporativo</Label>
+              <Input id="email" name="email" type="email" required placeholder="seu@email.com" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Telefone / WhatsApp</Label>
+              <Input id="phone" name="phone" required placeholder="(11) 99999-9999" />
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Detalhes do Projeto */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-primary border-b pb-2">2. Sobre o Projeto</h3>
-        <div className="grid md:grid-cols-2 gap-6">
+  
+        {/* Detalhes do Projeto */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-primary border-b pb-2">2. Sobre o Projeto</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="service">Tipo de Serviço</Label>
+              <Select id="service" name="service" defaultValue={initialService}>
+                <option value="" disabled>Selecione uma opção</option>
+                <option value="Consultoria em TI">Consultoria em TI</option>
+                <option value="Desenvolvimento de Soluções">Desenvolvimento de Soluções</option>
+                <option value="Manutenção e Suporte">Manutenção e Suporte</option>
+                <option value="Automações">Automações</option>
+                <option value="Análise de Dados">Análise de Dados</option>
+                <option value="Gestão Comercial">Gestão Comercial</option>
+                <option value="Outro">Outro</option>
+              </Select>
+            </div>
+          </div>
+          
           <div className="space-y-2">
-            <Label htmlFor="service">Tipo de Serviço</Label>
-            <Select id="service" name="service" defaultValue={initialService}>
+            <Label htmlFor="description">Descrição do Projeto</Label>
+            <Textarea 
+              id="description" 
+              name="description"
+              required 
+              placeholder="Descreva os objetivos, funcionalidades desejadas e desafios atuais..." 
+              className="min-h-[150px]"
+            />
+          </div>
+  
+          <div className="space-y-2">
+            <Label htmlFor="deadline">Prazo Esperado</Label>
+            <Select id="deadline" name="deadline" defaultValue="">
               <option value="" disabled>Selecione uma opção</option>
-              <option value="Consultoria em TI">Consultoria em TI</option>
-              <option value="Desenvolvimento de Soluções">Desenvolvimento de Soluções</option>
-              <option value="Manutenção e Suporte">Manutenção e Suporte</option>
-              <option value="Automações">Automações</option>
-              <option value="Análise de Dados">Análise de Dados</option>
-              <option value="Gestão Comercial">Gestão Comercial</option>
-              <option value="Outro">Outro</option>
+              <option value="urgente">Urgente (Imediato)</option>
+              <option value="1-mes">Curto Prazo (1 mês)</option>
+              <option value="3-meses">Médio Prazo (3 meses)</option>
+              <option value="flexivel">Flexível</option>
             </Select>
           </div>
         </div>
-        
-        <div className="space-y-2">
-          <Label htmlFor="description">Descrição do Projeto</Label>
-          <Textarea 
-            id="description" 
-            name="description"
-            required 
-            placeholder="Descreva os objetivos, funcionalidades desejadas e desafios atuais..." 
-            className="min-h-[150px]"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="deadline">Prazo Esperado</Label>
-          <Select id="deadline" name="deadline" defaultValue="">
-            <option value="" disabled>Selecione uma opção</option>
-            <option value="urgente">Urgente (Imediato)</option>
-            <option value="1-mes">Curto Prazo (1 mês)</option>
-            <option value="3-meses">Médio Prazo (3 meses)</option>
-            <option value="flexivel">Flexível</option>
-          </Select>
-        </div>
-      </div>
-
-      <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Enviando..." : (
-          <>
-            Solicitar Orçamento <Send className="ml-2 h-4 w-4" />
-          </>
-        )}
-      </Button>
-    </form>
+  
+        <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+          {isSubmitting ? "Enviando..." : (
+            <>
+              Solicitar Orçamento <Send className="ml-2 h-4 w-4" />
+            </>
+          )}
+        </Button>
+      </form>
+    </>
   );
 }
 

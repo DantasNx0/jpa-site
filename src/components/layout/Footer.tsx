@@ -47,7 +47,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-gray-300 text-sm">
                 <Phone className="h-4 w-4 text-secondary" />
-                <span>(61) 98148-5505</span>
+                <span>(99) 99999-9999</span>
               </li>
               <li className="flex items-center gap-2 text-gray-300 text-sm">
                 <Mail className="h-4 w-4 text-secondary" />
@@ -67,7 +67,7 @@ export function Footer() {
               <a href="https://www.instagram.com/jpa.tech/" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
+              <a href="https://www.linkedin.com/company/jpa-tech/" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
               {/* <a href="#" className="bg-white/10 p-2 rounded-full hover:bg-secondary transition-colors">

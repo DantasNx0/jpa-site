@@ -113,7 +113,7 @@ export default function ServicesPage() {
                 </ul>
               </div>
               <div className="p-6 pt-0 mt-auto">
-                <Button asChild className="w-full" variant="outline">
+                <Button asChild className="w-full hover:bg-primary hover:text-white transition-all duration-300" variant="outline">
                   <Link href={`/orcamento?servico=${encodeURIComponent(service.title)}`}>
                     Solicitar Orçamento
                   </Link>

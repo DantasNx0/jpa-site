@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Select } from "@/components/ui/Select";
@@ -170,30 +171,34 @@ export default function OrcamentoPage() {
       {/* Hero Section */}
       <section className="bg-primary py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Solicitar Proposta</h1>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Conte-nos sobre o seu projeto e receba uma proposta personalizada para o seu negócio.
-          </p>
+          <FadeIn direction="up">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Solicitar Proposta</h1>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+              Conte-nos sobre o seu projeto e receba uma proposta personalizada para o seu negócio.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
       <section className="container mx-auto px-4 max-w-4xl">
-        <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
-          <div className="mb-8 bg-blue-50 p-4 rounded-lg flex gap-3 items-start">
-            <CheckCircle className="text-secondary h-6 w-6 flex-shrink-0 mt-0.5" />
-            <div>
-              <h4 className="font-bold text-primary">Por que solicitar um orçamento?</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Nossa equipe técnica analisará sua demanda detalhadamente para oferecer a solução com melhor custo-benefício. 
-                O retorno é feito em até 24 horas úteis.
-              </p>
+        <FadeIn direction="up" delay={0.2}>
+          <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+            <div className="mb-8 bg-blue-50 p-4 rounded-lg flex gap-3 items-start">
+              <CheckCircle className="text-secondary h-6 w-6 flex-shrink-0 mt-0.5" />
+              <div>
+                <h4 className="font-bold text-primary">Por que solicitar um orçamento?</h4>
+                <p className="text-sm text-gray-600 mt-1">
+                  Nossa equipe técnica analisará sua demanda detalhadamente para oferecer a solução com melhor custo-benefício. 
+                  O retorno é feito em até 24 horas úteis.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <Suspense fallback={<div>Carregando formulário...</div>}>
-            <OrcamentoForm />
-          </Suspense>
-        </div>
+            <Suspense fallback={<div>Carregando formulário...</div>}>
+              <OrcamentoForm />
+            </Suspense>
+          </div>
+        </FadeIn>
       </section>
     </div>
   );
